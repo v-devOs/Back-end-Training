@@ -24,7 +24,7 @@ const salarios = [
   },
 ]
 
-const id = 10
+const id = 1
 
 
 const getEmpleado = ( id, callback ) => {
@@ -50,13 +50,13 @@ const getSalario = ( id, callback ) => {
 
 getEmpleado( id, ( err ,empleado ) => {
 
-  err 
-    ? console.log( err )
-    : console.log( empleado )
-})
+  if( err ) return console.log(err)
 
-getSalario( id, ( err, salario ) => {
-  err
-    ? console.log(err)
-    : console.log(salario)
+  getSalario( id, ( err, salario ) => {
+    err 
+      ? console.log(err)
+      : console.log('El empleado', empleado,' tiene un salario de ', salario.salario)
+  })
+
+  
 })
