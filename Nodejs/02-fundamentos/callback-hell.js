@@ -24,6 +24,8 @@ const salarios = [
   },
 ]
 
+const id = 10
+
 
 const getEmpleado = ( id, callback ) => {
   
@@ -31,14 +33,30 @@ const getEmpleado = ( id, callback ) => {
 
   return empleado 
     ? callback( null , empleado )
-    : callback( true ,`Empleado con id: ${id} no existe`)
+    : callback(`Empleado con id: ${id} no existe` )
+
+}
+
+const getSalario = ( id, callback ) => {
+
+  const salario = salarios.find( s => s.id === id )
+
+  return salario
+    ? callback( null, salario )
+    : callback( `Error al buscar salario con id: ${ id }` )
 
 }
 
 
-getEmpleado( 15, ( err ,empleado ) => {
+getEmpleado( id, ( err ,empleado ) => {
 
   err 
-    ? console.log( empleado )
+    ? console.log( err )
     : console.log( empleado )
+})
+
+getSalario( id, ( err, salario ) => {
+  err
+    ? console.log(err)
+    : console.log(salario)
 })
