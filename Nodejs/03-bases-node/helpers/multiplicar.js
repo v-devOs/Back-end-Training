@@ -1,12 +1,13 @@
 const fs = require('fs')
+require('colors')
 
-const crearArchivo = async( base = 5, listar ) => {
+const crearArchivo = async( base = 5, listar, hasta ) => {
 
-  let salida = multiplicar( base )
+  let salida = multiplicar( base, hasta )
 
   if( listar ){
     imprimirHeader(base)
-    console.log(salida)
+    console.log(salida.yellow)
   }
   
   try {
@@ -25,13 +26,13 @@ const imprimirHeader = ( base ) => {
   ========================      
   `
 
-  console.log(header)
+  console.log(header.blue)
 }
 
-const multiplicar = ( base ) => {
+const multiplicar = ( base, hasta ) => {
   let salida = ''
 
-  for (let index = 1; index <= 10; index++) {
+  for (let index = 1; index <= hasta; index++) {
     salida += `${base} x ${ index } = ${ base * index}\n`;
   }
 
