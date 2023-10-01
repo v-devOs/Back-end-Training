@@ -1,13 +1,14 @@
 const fs = require('fs')
 
-const crearArchivo = async( base = 5 ) => {
-
-  imprimirHeader(base)
+const crearArchivo = async( base = 5, listar ) => {
 
   let salida = multiplicar( base )
 
-  console.log(salida)
-
+  if( listar ){
+    imprimirHeader(base)
+    console.log(salida)
+  }
+  
   try {
     fs.writeFileSync(`tabla-${base}.txt`, salida)
     return `tabla-${base}.txt creada correctamente`
