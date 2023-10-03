@@ -15,13 +15,14 @@ const generateRandomNames = () => {
 
     person.curp = generateCurpOrRfc( person.primerApellido, person.segundoApellido, person.nombre, person.date, true )
     person.rfc = generateCurpOrRfc( person.primerApellido, person.segundoApellido, person.nombre, person.date)
+    person.email = generateEmail(person.nombre, person.primerApellido)
+    person.password = `${person.nombre.toLocaleLowerCase()}${person.primerApellido.toLocaleUpperCase().substring(1,3)}${Math.floor(Math.random()* 1000)}`
 
     namesGenerated.push(person)
   }
 
   return namesGenerated
 }
-
 
 const generateCurpOrRfc = ( 
     segundoApellido = ''.toLocaleUpperCase(), 
@@ -35,8 +36,6 @@ const generateCurpOrRfc = (
     ? `${primerApellido.charAt(0)}${getFirsVocal(primerApellido)}${segundoApellido.charAt(0)}${getFirsVocal(nombre)}${formatDate(date)}HGTLPRA5`
     : `${primerApellido.charAt(0)}${getFirsVocal(primerApellido)}${segundoApellido.charAt(0)}${getFirsVocal(nombre)}${formatDate(date)}X${Math.floor(Math.random() * 10) + 10}`
 }
-
-
 
 const getFirsVocal = ( dataUser = '') => {
   const vocals = ['A', 'E', 'I', 'O', 'U']
@@ -54,8 +53,6 @@ const getFirsVocal = ( dataUser = '') => {
 
   return firstVocal
 }
-
-
 
 const formatDate = ( date = '') => {
 
@@ -76,6 +73,14 @@ const generateRandomDate = () => {
 
 
   return `${day < 10 ? '0': ''}${day}-${ month < 10 ? '0' : '' }${month}-${ alter % 2 === 0 ? '20' : '19'}${ alter % 2 == 0 && year < 10 ? '0': ''}${year}`
+}
+
+
+const generateEmail = ( nombre = '', surname = '' ) => {
+  const alterDomain = Math.floor(Math.random() * 10)
+  const domain1 = '@gmail.com'
+  const domain2 = '@outlook.com'
+  return `${nombre.toLowerCase()}${surname.toLowerCase().substring(1,3)}${Math.floor(Math.random() * 10)}${alterDomain % 2 === 0 ? domain1 : domain2}`
 }
 
 module.exports = {
